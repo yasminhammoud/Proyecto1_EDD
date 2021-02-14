@@ -1,10 +1,11 @@
+
+package oracleofbacon;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-        
-package oracleofbacon;
 
 public class Class {
     
@@ -17,7 +18,7 @@ public class Class {
         seleccionarArchivo.setFileFilter(filtro);
         seleccionarArchivo.showOpenDialog(null);
         archivoSeleccionado = seleccionarArchivo.getSelectedFile();
-       
+        
         try{
            
            FileReader fr = new FileReader(archivoSeleccionado);
@@ -39,4 +40,5 @@ public class Class {
        
        }
     
+}
 }
