@@ -16,7 +16,8 @@ public class Acceso extends javax.swing.JFrame {
      */
     public Acceso() {
         initComponents();
-        
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

@@ -16,6 +16,8 @@ public class Grafo extends javax.swing.JFrame {
      */
     public Grafo() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

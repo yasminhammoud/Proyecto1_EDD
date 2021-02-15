@@ -16,6 +16,8 @@ public class Elenco extends javax.swing.JFrame {
      */
     public Elenco() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

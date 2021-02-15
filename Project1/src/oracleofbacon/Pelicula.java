@@ -16,6 +16,8 @@ public class Pelicula extends javax.swing.JFrame {
      */
     public Pelicula() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

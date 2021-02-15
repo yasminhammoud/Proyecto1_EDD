@@ -16,6 +16,8 @@ public class Busqueda extends javax.swing.JFrame {
      */
     public Busqueda() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
