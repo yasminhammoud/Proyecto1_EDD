@@ -127,42 +127,42 @@ public class ListaSimple {
     /**
      * @return the pFirst
      */
-    public NodoSimple getInicio() {
+    public NodoSimple getPFirst() {
         return this.pFirst;
     }
 
     /**
      * @param pFirst the pFirst to set
      */
-    public void setInicio(NodoSimple pFirst) {
+    public void setPFirst(NodoSimple pFirst) {
         this.pFirst = pFirst;
     }
 
     /**
      * @return the pLast
      */
-    public NodoSimple getFin() {
+    public NodoSimple getPLast() {
         return this.pLast;
     }
 
     /**
      * @param pLast the pLast to set
      */
-    public void setFin(NodoSimple pLast) {
+    public void setPLast(NodoSimple pLast) {
         this.pLast = pLast;
     }
 
     /**
      * @return the iSize
      */
-    public int getTamanio() {
+    public int getISize() {
         return this.iSize;
     }
 
     /**
      * @param iSize the iSize to set
      */
-    public void setTamanio(int iSize) {
+    public void setISize(int iSize) {
         this.iSize = iSize;
     }
 }
