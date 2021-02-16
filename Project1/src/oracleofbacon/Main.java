@@ -211,7 +211,7 @@ public class Main extends javax.swing.JFrame {
                         //System.out.println(this.oRelaciones[i][0]); trae el id del actor
                         this.oActors[i][1] = registro[1];
                         //System.out.println(this.oRelaciones[i][1]); trae el nombre del actor
-                        this.oActors[i][1] = registro[2];
+                        this.oActors[i][2] = registro[2];
                         //System.out.println(this.oRelaciones[i][2]); trae la fecha de nacimiento
                     }
                 }
@@ -260,7 +260,7 @@ public class Main extends javax.swing.JFrame {
                         //System.out.println(this.oRelaciones[i][0]); trae el id_movie
                         this.oMovies[i][1] = registro[1];
                         //System.out.println(this.oRelaciones[i][1]); trae el title
-                        this.oMovies[i][1] = registro[2];
+                        this.oMovies[i][2] = registro[2];
                         //System.out.println(this.oRelaciones[i][2]); trae la fecha de lanzamiento
                     }
                 }
