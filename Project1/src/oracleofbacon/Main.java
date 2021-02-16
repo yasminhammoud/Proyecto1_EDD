@@ -19,7 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Main extends javax.swing.JFrame {
 
     Object[] oActors;
-    File fMovies;
+    Object[] fMovies;
     Object[] oRelaciones;
 
     /**
@@ -171,7 +171,7 @@ public class Main extends javax.swing.JFrame {
         seleccionarArchivo.setFileFilter(filtro);
         seleccionarArchivo.showOpenDialog(null);
         fArchivoSeleccionado = seleccionarArchivo.getSelectedFile();
-        relacionPath.setText(fArchivoSeleccionado.getAbsolutePath());
+        actoresPath.setText(fArchivoSeleccionado.getAbsolutePath());
        
         try {
 
@@ -198,35 +198,38 @@ public class Main extends javax.swing.JFrame {
 
     private void cargarPeliculasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarPeliculasButtonActionPerformed
         // TODO add your handling code here:
-        File archivoSeleccionado;
+        File fArchivoSeleccionado;
         JFileChooser seleccionarArchivo;
         seleccionarArchivo = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*CSV", "csv");
         seleccionarArchivo.setFileFilter(filtro);
         seleccionarArchivo.showOpenDialog(null);
-        this.fMovies = seleccionarArchivo.getSelectedFile();
-        peliculasPath.setText(this.fMovies.getAbsolutePath());
+        fArchivoSeleccionado = seleccionarArchivo.getSelectedFile();
+        peliculasPath.setText(fArchivoSeleccionado.getAbsolutePath());
+       
         try {
 
-            FileReader fr = new FileReader(this.fMovies);
+            FileReader fr = new FileReader(fArchivoSeleccionado);
             BufferedReader br = new BufferedReader(fr);
-           
-//           String cadena;
-//           Object[] elemento = new Object[3];
-           
-//           while((cadena = br.readLine())!= null)
-//           {
-//               String registro[] = cadena.split(",");
-//               elemento[0] = registro[0];
-//               elemento[1] = registro[1];
-//               elemento[2] = registro[2];
-//               System.out.println(elemento[1]);
-//               
-//           }
+
+            String cadena;
+            this.fMovies = new Object[3];
+            while ((cadena = br.readLine()) != null) {
+                String registro[] = cadena.split(",");
+                this.fMovies[0] = registro[0];
+                this.fMovies[1] = registro[1];
+                this.fMovies[2] = registro[2];
+            }
+            ImageIcon img = new ImageIcon("src/Imagenes/comprobado.png");
+            checkRelacion.setIcon(img);
+
            
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+            ImageIcon img = new ImageIcon("src/Imagenes/boton-x.png");
+            checkRelacion.setIcon(img);
         }
+
     }//GEN-LAST:event_cargarPeliculasButtonActionPerformed
 
     private void procederButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procederButtonActionPerformed
