@@ -5,9 +5,13 @@
  */
 package oracleofbacon;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -18,9 +22,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Main extends javax.swing.JFrame {
 
-    Object[] oActors;
-    Object[] fMovies;
-    Object[] oRelaciones;
+    Object[][] oRelaciones, oMovies, oActors;
+    boolean isOkRelaciones, isOkMovies, isOkActors;
 
     /**
      * Creates new form Main
@@ -132,6 +135,7 @@ public class Main extends javax.swing.JFrame {
 
     private void cargarRelacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarRelacionButtonActionPerformed
         // TODO add your handling code here:
+        ImageIcon img;
         File fArchivoSeleccionado;
         JFileChooser seleccionarArchivo;
         seleccionarArchivo = new JFileChooser();
@@ -142,24 +146,35 @@ public class Main extends javax.swing.JFrame {
         relacionPath.setText(fArchivoSeleccionado.getAbsolutePath());
         try {
 
-            FileReader fr = new FileReader(fArchivoSeleccionado);
-            BufferedReader br = new BufferedReader(fr);
+            int iFileSize = countLines(fArchivoSeleccionado.getAbsolutePath()) - 1;
+            if (iFileSize > 0) {
+                try (FileReader fr = new FileReader(fArchivoSeleccionado)) {//El try cierra el FileReader
+                    BufferedReader br = new BufferedReader(fr);
+                    br.readLine();//Esto es para leer el encabezado e ignorarlo
+                    
+                    String cadena;
+                    this.oRelaciones = new Object[iFileSize][2];
+                    for (int i = 0; i < iFileSize; i++) {
+                        cadena = br.readLine();
+                        String[] registro = cadena.split(",");
+                        this.oRelaciones[i][0] = registro[0];
+                        //System.out.println(this.oRelaciones[i][0]); trae el person id
+                        this.oRelaciones[i][1] = registro[1];
+                        //System.out.println(this.oRelaciones[i][1]); trae el movie id
+                    }
+                }
+                img = new ImageIcon("src/Imagenes/comprobado.png");
+            }
+            else {
+                System.out.println("El numero de lineas debe ser mayor a 0 (sin contar el encabezado)");
+                img = new ImageIcon("src/Imagenes/boton-x.png");
+            }
 
-           String cadena;
-           this.oRelaciones = new Object[2];
-           while((cadena = br.readLine())!= null)
-           {
-               String registro[] = cadena.split(",");
-               this.oRelaciones[0] = registro[0];
-               this.oRelaciones[1] = registro[1];
-           }
-            ImageIcon img = new ImageIcon("src/Imagenes/comprobado.png");
-            checkRelacion.setIcon(img);
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            ImageIcon img = new ImageIcon("src/Imagenes/boton-x.png");
-            checkRelacion.setIcon(img);
+            System.out.println("Error: " + ex.getMessage());
+            img = new ImageIcon("src/Imagenes/boton-x.png");
         }
+        checkRelacion.setIcon(img);
     }//GEN-LAST:event_cargarRelacionButtonActionPerformed
 
     private void cargarActoresButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActoresButtonActionPerformed
@@ -172,7 +187,7 @@ public class Main extends javax.swing.JFrame {
         seleccionarArchivo.showOpenDialog(null);
         fArchivoSeleccionado = seleccionarArchivo.getSelectedFile();
         actoresPath.setText(fArchivoSeleccionado.getAbsolutePath());
-       
+
         try {
 
             FileReader fr = new FileReader(fArchivoSeleccionado);
@@ -187,12 +202,12 @@ public class Main extends javax.swing.JFrame {
                 this.oActors[2] = registro[2];
             }
             ImageIcon img = new ImageIcon("src/Imagenes/comprobado.png");
-            checkRelacion.setIcon(img);
-           
+            checkActores.setIcon(img);
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             ImageIcon img = new ImageIcon("src/Imagenes/boton-x.png");
-            checkRelacion.setIcon(img);
+            checkActores.setIcon(img);
         }
     }//GEN-LAST:event_cargarActoresButtonActionPerformed
 
@@ -206,7 +221,7 @@ public class Main extends javax.swing.JFrame {
         seleccionarArchivo.showOpenDialog(null);
         fArchivoSeleccionado = seleccionarArchivo.getSelectedFile();
         peliculasPath.setText(fArchivoSeleccionado.getAbsolutePath());
-       
+
         try {
 
             FileReader fr = new FileReader(fArchivoSeleccionado);
@@ -221,13 +236,12 @@ public class Main extends javax.swing.JFrame {
                 this.fMovies[2] = registro[2];
             }
             ImageIcon img = new ImageIcon("src/Imagenes/comprobado.png");
-            checkRelacion.setIcon(img);
+            checkPeliculas.setIcon(img);
 
-           
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             ImageIcon img = new ImageIcon("src/Imagenes/boton-x.png");
-            checkRelacion.setIcon(img);
+            checkPeliculas.setIcon(img);
         }
 
     }//GEN-LAST:event_cargarPeliculasButtonActionPerformed
@@ -237,6 +251,42 @@ public class Main extends javax.swing.JFrame {
 //        new Acceso().setVisible(true);
 //        this.setVisible(false);
     }//GEN-LAST:event_procederButtonActionPerformed
+
+    public static int countLines(String filename) throws IOException {
+        try (InputStream is = new BufferedInputStream(new FileInputStream(filename))) {
+            byte[] c = new byte[1024];
+
+            int readChars = is.read(c);
+            if (readChars == -1) {
+                // bail out if nothing to read
+                return 0;
+            }
+
+            // make it easy for the optimizer to tune this loop
+            int count = 0;
+            while (readChars == 1024) {
+                for (int i = 0; i < 1024;) {
+                    if (c[i++] == '\n') {
+                        ++count;
+                    }
+                }
+                readChars = is.read(c);
+            }
+
+            // count remaining characters
+            while (readChars != -1) {
+                //System.out.println(readChars);
+                for (int i = 0; i < readChars; ++i) {
+                    if (c[i] == '\n') {
+                        ++count;
+                    }
+                }
+                readChars = is.read(c);
+            }
+
+            return count == 0 ? 1 : count;
+        }
+    }
 
     /**
      * @param args the command line arguments
