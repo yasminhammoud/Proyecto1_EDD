@@ -18,7 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Main extends javax.swing.JFrame {
 
-    File fStars;
+    Object[] oActors;
     File fMovies;
     Object[] oRelaciones;
 
@@ -164,32 +164,35 @@ public class Main extends javax.swing.JFrame {
 
     private void cargarActoresButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActoresButtonActionPerformed
         // TODO add your handling code here:
-        File archivoSeleccionado;
+        File fArchivoSeleccionado;
         JFileChooser seleccionarArchivo;
         seleccionarArchivo = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*CSV", "csv");
         seleccionarArchivo.setFileFilter(filtro);
         seleccionarArchivo.showOpenDialog(null);
-        this.fStars = seleccionarArchivo.getSelectedFile();
-        actoresPath.setText(this.fStars.getAbsolutePath());
+        fArchivoSeleccionado = seleccionarArchivo.getSelectedFile();
+        relacionPath.setText(fArchivoSeleccionado.getAbsolutePath());
+       
         try {
 
-            FileReader fr = new FileReader(this.fStars);
+            FileReader fr = new FileReader(fArchivoSeleccionado);
             BufferedReader br = new BufferedReader(fr);
 
-//           String cadena;
-//           Object[] elemento = new Object[3];
-//           while((cadena = br.readLine())!= null)
-//           {
-//               String registro[] = cadena.split(",");
-//               elemento[0] = registro[0];
-//               elemento[1] = registro[1];
-//               elemento[2] = registro[2];
-//               System.out.println(elemento[1]);
-//               
-//           }
+            String cadena;
+            this.oActors = new Object[3];
+            while ((cadena = br.readLine()) != null) {
+                String registro[] = cadena.split(",");
+                this.oActors[0] = registro[0];
+                this.oActors[1] = registro[1];
+                this.oActors[2] = registro[2];
+            }
+            ImageIcon img = new ImageIcon("src/Imagenes/comprobado.png");
+            checkRelacion.setIcon(img);
+           
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+            ImageIcon img = new ImageIcon("src/Imagenes/boton-x.png");
+            checkRelacion.setIcon(img);
         }
     }//GEN-LAST:event_cargarActoresButtonActionPerformed
 
