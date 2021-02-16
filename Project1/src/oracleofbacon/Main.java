@@ -8,6 +8,7 @@ package oracleofbacon;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -19,7 +20,7 @@ public class Main extends javax.swing.JFrame {
 
     File fStars;
     File fMovies;
-    File fRelation;
+    Object[] oRelaciones;
 
     /**
      * Creates new form Main
@@ -47,7 +48,10 @@ public class Main extends javax.swing.JFrame {
         actoresPath = new javax.swing.JTextField();
         peliculasPath = new javax.swing.JTextField();
         relacionPath = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        checkRelacion = new javax.swing.JLabel();
+        checkActores = new javax.swing.JLabel();
+        checkPeliculas = new javax.swing.JLabel();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -62,7 +66,7 @@ public class Main extends javax.swing.JFrame {
                 cargarActoresButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(cargarActoresButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, 130, 30));
+        jPanel1.add(cargarActoresButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, 130, 30));
 
         cargarPeliculasButton.setBackground(new java.awt.Color(236, 159, 3));
         cargarPeliculasButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -72,7 +76,7 @@ public class Main extends javax.swing.JFrame {
                 cargarPeliculasButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(cargarPeliculasButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 260, 130, 30));
+        jPanel1.add(cargarPeliculasButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 130, 30));
 
         cargarRelacionButton.setBackground(new java.awt.Color(65, 38, 11));
         cargarRelacionButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
@@ -82,7 +86,7 @@ public class Main extends javax.swing.JFrame {
                 cargarRelacionButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(cargarRelacionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 310, 130, 30));
+        jPanel1.add(cargarRelacionButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 310, 130, 30));
 
         procederButton.setBackground(new java.awt.Color(45, 89, 116));
         procederButton.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
@@ -109,8 +113,17 @@ public class Main extends javax.swing.JFrame {
         relacionPath.setRequestFocusEnabled(false);
         jPanel1.add(relacionPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 420, 30));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/main.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-6, -5, 800, 460));
+        checkRelacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/dry-clean.png"))); // NOI18N
+        jPanel1.add(checkRelacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 50, 50));
+
+        checkActores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/dry-clean.png"))); // NOI18N
+        jPanel1.add(checkActores, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 200, 50, 50));
+
+        checkPeliculas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/dry-clean.png"))); // NOI18N
+        jPanel1.add(checkPeliculas, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 250, 50, 50));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/main.png"))); // NOI18N
+        jPanel1.add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-6, -5, 800, 460));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 450));
 
@@ -119,32 +132,33 @@ public class Main extends javax.swing.JFrame {
 
     private void cargarRelacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarRelacionButtonActionPerformed
         // TODO add your handling code here:
-        File archivoSeleccionado;
+        File fArchivoSeleccionado;
         JFileChooser seleccionarArchivo;
         seleccionarArchivo = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*CSV", "csv");
         seleccionarArchivo.setFileFilter(filtro);
         seleccionarArchivo.showOpenDialog(null);
-        this.fRelation = seleccionarArchivo.getSelectedFile();
-        relacionPath.setText(this.fRelation.getAbsolutePath());
+        fArchivoSeleccionado = seleccionarArchivo.getSelectedFile();
+        relacionPath.setText(fArchivoSeleccionado.getAbsolutePath());
         try {
 
-            FileReader fr = new FileReader(this.fRelation);
+            FileReader fr = new FileReader(fArchivoSeleccionado);
             BufferedReader br = new BufferedReader(fr);
 
-//           String cadena;
-//           Object[] elemento = new Object[3];
-//           while((cadena = br.readLine())!= null)
-//           {
-//               String registro[] = cadena.split(",");
-//               elemento[0] = registro[0];
-//               elemento[1] = registro[1];
-//               elemento[2] = registro[2];
-//               System.out.println(elemento[1]);
-//               
-//           }
+           String cadena;
+           this.oRelaciones = new Object[2];
+           while((cadena = br.readLine())!= null)
+           {
+               String registro[] = cadena.split(",");
+               this.oRelaciones[0] = registro[0];
+               this.oRelaciones[1] = registro[1];
+           }
+            ImageIcon img = new ImageIcon("src/Imagenes/comprobado.png");
+            checkRelacion.setIcon(img);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+            ImageIcon img = new ImageIcon("src/Imagenes/boton-x.png");
+            checkRelacion.setIcon(img);
         }
     }//GEN-LAST:event_cargarRelacionButtonActionPerformed
 
@@ -214,8 +228,8 @@ public class Main extends javax.swing.JFrame {
 
     private void procederButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procederButtonActionPerformed
         // TODO add your handling code here:
-        new Acceso().setVisible(true);
-        this.setVisible(false);
+//        new Acceso().setVisible(true);
+//        this.setVisible(false);
     }//GEN-LAST:event_procederButtonActionPerformed
 
     /**
@@ -258,7 +272,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton cargarActoresButton;
     private javax.swing.JButton cargarPeliculasButton;
     private javax.swing.JButton cargarRelacionButton;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel checkActores;
+    private javax.swing.JLabel checkPeliculas;
+    private javax.swing.JLabel checkRelacion;
+    private javax.swing.JLabel fondo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField peliculasPath;
     private javax.swing.JButton procederButton;
