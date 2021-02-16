@@ -11,6 +11,7 @@ import java.io.FileReader;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +20,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Main extends javax.swing.JFrame {
 
     Object[] oActors;
-    Object[] fMovies;
+    Object[] oMovies;
     Object[] oRelaciones;
 
     /**
@@ -59,7 +60,7 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cargarActoresButton.setBackground(new java.awt.Color(79, 176, 129));
-        cargarActoresButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cargarActoresButton.setForeground(new java.awt.Color(255, 255, 255));
         cargarActoresButton.setText("Cargar actores");
         cargarActoresButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,7 +70,7 @@ public class Main extends javax.swing.JFrame {
         jPanel1.add(cargarActoresButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, 130, 30));
 
         cargarPeliculasButton.setBackground(new java.awt.Color(236, 159, 3));
-        cargarPeliculasButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cargarPeliculasButton.setForeground(new java.awt.Color(255, 255, 255));
         cargarPeliculasButton.setText("Cargar peliculas");
         cargarPeliculasButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,8 +80,8 @@ public class Main extends javax.swing.JFrame {
         jPanel1.add(cargarPeliculasButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 130, 30));
 
         cargarRelacionButton.setBackground(new java.awt.Color(65, 38, 11));
-        cargarRelacionButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cargarRelacionButton.setText("Cargar relacion");
+        cargarRelacionButton.setForeground(new java.awt.Color(255, 255, 255));
+        cargarRelacionButton.setText("Cargar relación");
         cargarRelacionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cargarRelacionButtonActionPerformed(evt);
@@ -101,17 +102,33 @@ public class Main extends javax.swing.JFrame {
         actoresPath.setEditable(false);
         actoresPath.setBackground(new java.awt.Color(79, 176, 129));
         actoresPath.setRequestFocusEnabled(false);
-        jPanel1.add(actoresPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 420, 30));
+        actoresPath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actoresPathActionPerformed(evt);
+            }
+        });
+        jPanel1.add(actoresPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 470, 30));
 
         peliculasPath.setEditable(false);
         peliculasPath.setBackground(new java.awt.Color(236, 159, 3));
         peliculasPath.setRequestFocusEnabled(false);
-        jPanel1.add(peliculasPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 420, 30));
+        peliculasPath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                peliculasPathActionPerformed(evt);
+            }
+        });
+        jPanel1.add(peliculasPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 470, 30));
 
         relacionPath.setEditable(false);
         relacionPath.setBackground(new java.awt.Color(65, 38, 11));
+        relacionPath.setForeground(new java.awt.Color(255, 255, 255));
         relacionPath.setRequestFocusEnabled(false);
-        jPanel1.add(relacionPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 420, 30));
+        relacionPath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                relacionPathActionPerformed(evt);
+            }
+        });
+        jPanel1.add(relacionPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 470, 30));
 
         checkRelacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/dry-clean.png"))); // NOI18N
         jPanel1.add(checkRelacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 50, 50));
@@ -153,10 +170,12 @@ public class Main extends javax.swing.JFrame {
                this.oRelaciones[0] = registro[0];
                this.oRelaciones[1] = registro[1];
            }
+           
             ImageIcon img = new ImageIcon("src/Imagenes/comprobado.png");
             checkRelacion.setIcon(img);
+            
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "El tipo de archivo ingresado no es válido");
             ImageIcon img = new ImageIcon("src/Imagenes/boton-x.png");
             checkRelacion.setIcon(img);
         }
@@ -187,12 +206,12 @@ public class Main extends javax.swing.JFrame {
                 this.oActors[2] = registro[2];
             }
             ImageIcon img = new ImageIcon("src/Imagenes/comprobado.png");
-            checkRelacion.setIcon(img);
+            checkActores.setIcon(img);
            
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "El tipo de archivo ingresado no es válido");
             ImageIcon img = new ImageIcon("src/Imagenes/boton-x.png");
-            checkRelacion.setIcon(img);
+            checkActores.setIcon(img);
         }
     }//GEN-LAST:event_cargarActoresButtonActionPerformed
 
@@ -213,30 +232,42 @@ public class Main extends javax.swing.JFrame {
             BufferedReader br = new BufferedReader(fr);
 
             String cadena;
-            this.fMovies = new Object[3];
+            this.oMovies = new Object[3];
             while ((cadena = br.readLine()) != null) {
                 String registro[] = cadena.split(",");
-                this.fMovies[0] = registro[0];
-                this.fMovies[1] = registro[1];
-                this.fMovies[2] = registro[2];
+                this.oMovies[0] = registro[0];
+                this.oMovies[1] = registro[1];
+                this.oMovies[2] = registro[2];
             }
+            
             ImageIcon img = new ImageIcon("src/Imagenes/comprobado.png");
-            checkRelacion.setIcon(img);
+            checkPeliculas.setIcon(img);
 
-           
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "El tipo de archivo ingresado no es válido");
             ImageIcon img = new ImageIcon("src/Imagenes/boton-x.png");
-            checkRelacion.setIcon(img);
+            checkPeliculas.setIcon(img);
         }
-
+       
     }//GEN-LAST:event_cargarPeliculasButtonActionPerformed
-
+,
     private void procederButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procederButtonActionPerformed
         // TODO add your handling code here:
-//        new Acceso().setVisible(true);
-//        this.setVisible(false);
+        new Acceso().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_procederButtonActionPerformed
+
+    private void relacionPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relacionPathActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_relacionPathActionPerformed
+
+    private void peliculasPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peliculasPathActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_peliculasPathActionPerformed
+
+    private void actoresPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actoresPathActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_actoresPathActionPerformed
 
     /**
      * @param args the command line arguments
