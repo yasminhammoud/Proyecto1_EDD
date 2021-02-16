@@ -182,7 +182,7 @@ public class Main extends javax.swing.JFrame {
             this.oActors = new Object[3];
             while ((cadena = br.readLine()) != null) {
                 String registro[] = cadena.split(",");
-                this.oActors[0] = registro[0];
+                this.oActors[0] = registro[0];//prueba
                 this.oActors[1] = registro[1];
                 this.oActors[2] = registro[2];
             }
