@@ -15,6 +15,7 @@ import java.io.InputStream;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,7 +24,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Main extends javax.swing.JFrame {
 
     Object[][] oRelaciones, oMovies, oActors;
-    boolean isOkRelaciones, isOkMovies, isOkActors;
+    boolean isOkRelaciones = false, isOkMovies = false, isOkActors = false;
 
     /**
      * Creates new form Main
@@ -62,7 +63,7 @@ public class Main extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cargarActoresButton.setBackground(new java.awt.Color(79, 176, 129));
-        cargarActoresButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cargarActoresButton.setForeground(new java.awt.Color(255, 255, 255));
         cargarActoresButton.setText("Cargar actores");
         cargarActoresButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,7 +73,7 @@ public class Main extends javax.swing.JFrame {
         jPanel1.add(cargarActoresButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, 130, 30));
 
         cargarPeliculasButton.setBackground(new java.awt.Color(236, 159, 3));
-        cargarPeliculasButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        cargarPeliculasButton.setForeground(new java.awt.Color(255, 255, 255));
         cargarPeliculasButton.setText("Cargar peliculas");
         cargarPeliculasButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,8 +83,8 @@ public class Main extends javax.swing.JFrame {
         jPanel1.add(cargarPeliculasButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 130, 30));
 
         cargarRelacionButton.setBackground(new java.awt.Color(65, 38, 11));
-        cargarRelacionButton.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        cargarRelacionButton.setText("Cargar relacion");
+        cargarRelacionButton.setForeground(new java.awt.Color(255, 255, 255));
+        cargarRelacionButton.setText("Cargar relación");
         cargarRelacionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cargarRelacionButtonActionPerformed(evt);
@@ -104,17 +105,18 @@ public class Main extends javax.swing.JFrame {
         actoresPath.setEditable(false);
         actoresPath.setBackground(new java.awt.Color(79, 176, 129));
         actoresPath.setRequestFocusEnabled(false);
-        jPanel1.add(actoresPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 420, 30));
+        jPanel1.add(actoresPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 470, 30));
 
         peliculasPath.setEditable(false);
         peliculasPath.setBackground(new java.awt.Color(236, 159, 3));
         peliculasPath.setRequestFocusEnabled(false);
-        jPanel1.add(peliculasPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 420, 30));
+        jPanel1.add(peliculasPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, 470, 30));
 
         relacionPath.setEditable(false);
         relacionPath.setBackground(new java.awt.Color(65, 38, 11));
+        relacionPath.setForeground(new java.awt.Color(255, 255, 255));
         relacionPath.setRequestFocusEnabled(false);
-        jPanel1.add(relacionPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 420, 30));
+        jPanel1.add(relacionPath, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 470, 30));
 
         checkRelacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/dry-clean.png"))); // NOI18N
         jPanel1.add(checkRelacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 50, 50));
@@ -134,7 +136,7 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cargarRelacionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarRelacionButtonActionPerformed
-        // TODO add your handling code here:
+
         ImageIcon img;
         File fArchivoSeleccionado;
         JFileChooser seleccionarArchivo;
@@ -142,16 +144,17 @@ public class Main extends javax.swing.JFrame {
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*CSV", "csv");
         seleccionarArchivo.setFileFilter(filtro);
         seleccionarArchivo.showOpenDialog(null);
-        fArchivoSeleccionado = seleccionarArchivo.getSelectedFile();
-        relacionPath.setText(fArchivoSeleccionado.getAbsolutePath());
         try {
+
+            fArchivoSeleccionado = seleccionarArchivo.getSelectedFile();
+            relacionPath.setText(fArchivoSeleccionado.getAbsolutePath());
 
             int iFileSize = countLines(fArchivoSeleccionado.getAbsolutePath()) - 1;
             if (iFileSize > 0) {
                 try (FileReader fr = new FileReader(fArchivoSeleccionado)) {//El try cierra el FileReader
                     BufferedReader br = new BufferedReader(fr);
                     br.readLine();//Esto es para leer el encabezado e ignorarlo
-                    
+
                     String cadena;
                     this.oRelaciones = new Object[iFileSize][2];
                     for (int i = 0; i < iFileSize; i++) {
@@ -164,92 +167,129 @@ public class Main extends javax.swing.JFrame {
                     }
                 }
                 img = new ImageIcon("src/Imagenes/comprobado.png");
-            }
-            else {
-                System.out.println("El numero de lineas debe ser mayor a 0 (sin contar el encabezado)");
+                this.isOkRelaciones = true;
+            } else {
+                //System.out.println("El numero de lineas debe ser mayor a 0 (sin contar el encabezado)");
                 img = new ImageIcon("src/Imagenes/boton-x.png");
+                JOptionPane.showMessageDialog(null, "El numero de lineas debe ser mayor a 0 (sin contar el encabezado)", "Error!", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Exception ex) {
-            System.out.println("Error: " + ex.getMessage());
+            //System.out.println("Error: " + ex.getMessage());
             img = new ImageIcon("src/Imagenes/boton-x.png");
+            JOptionPane.showMessageDialog(null, "Revise que sea un archivo valido", "Error!", JOptionPane.ERROR_MESSAGE);
         }
         checkRelacion.setIcon(img);
     }//GEN-LAST:event_cargarRelacionButtonActionPerformed
 
     private void cargarActoresButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarActoresButtonActionPerformed
-        // TODO add your handling code here:
+
+        ImageIcon img;
         File fArchivoSeleccionado;
         JFileChooser seleccionarArchivo;
         seleccionarArchivo = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*CSV", "csv");
         seleccionarArchivo.setFileFilter(filtro);
         seleccionarArchivo.showOpenDialog(null);
-        fArchivoSeleccionado = seleccionarArchivo.getSelectedFile();
-        actoresPath.setText(fArchivoSeleccionado.getAbsolutePath());
-
         try {
 
-            FileReader fr = new FileReader(fArchivoSeleccionado);
-            BufferedReader br = new BufferedReader(fr);
+            fArchivoSeleccionado = seleccionarArchivo.getSelectedFile();
+            actoresPath.setText(fArchivoSeleccionado.getAbsolutePath());
 
-            String cadena;
-            this.oActors = new Object[3];
-            while ((cadena = br.readLine()) != null) {
-                String registro[] = cadena.split(",");
-                this.oActors[0] = registro[0];//prueba
-                this.oActors[1] = registro[1];
-                this.oActors[2] = registro[2];
+            int iFileSize = countLines(fArchivoSeleccionado.getAbsolutePath()) - 1;
+            if (iFileSize > 0) {
+                try (FileReader fr = new FileReader(fArchivoSeleccionado)) {//El try cierra el FileReader
+                    BufferedReader br = new BufferedReader(fr);
+                    br.readLine();//Esto es para leer el encabezado e ignorarlo
+
+                    String cadena;
+                    this.oActors = new Object[iFileSize][3];
+                    for (int i = 0; i < iFileSize; i++) {
+                        cadena = br.readLine();
+                        String[] registro = cadena.split(",");
+                        this.oActors[i][0] = registro[0];
+                        //System.out.println(this.oRelaciones[i][0]); trae el id del actor
+                        this.oActors[i][1] = registro[1];
+                        //System.out.println(this.oRelaciones[i][1]); trae el nombre del actor
+                        this.oActors[i][1] = registro[2];
+                        //System.out.println(this.oRelaciones[i][2]); trae la fecha de nacimiento
+                    }
+                }
+                img = new ImageIcon("src/Imagenes/comprobado.png");
+                this.isOkActors = true;
+            } else {
+                //System.out.println("El numero de lineas debe ser mayor a 0 (sin contar el encabezado)");
+                img = new ImageIcon("src/Imagenes/boton-x.png");
+                JOptionPane.showMessageDialog(null, "El numero de lineas debe ser mayor a 0 (sin contar el encabezado)", "Error!", JOptionPane.ERROR_MESSAGE);
             }
-            ImageIcon img = new ImageIcon("src/Imagenes/comprobado.png");
-            checkActores.setIcon(img);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            ImageIcon img = new ImageIcon("src/Imagenes/boton-x.png");
-            checkActores.setIcon(img);
+            //System.out.println("Error: " + ex.getMessage());
+            img = new ImageIcon("src/Imagenes/boton-x.png");
+            JOptionPane.showMessageDialog(null, "Revise que sea un archivo valido", "Error!", JOptionPane.ERROR_MESSAGE);
         }
+        checkActores.setIcon(img);
     }//GEN-LAST:event_cargarActoresButtonActionPerformed
 
     private void cargarPeliculasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarPeliculasButtonActionPerformed
-        // TODO add your handling code here:
+
+        ImageIcon img;
         File fArchivoSeleccionado;
         JFileChooser seleccionarArchivo;
         seleccionarArchivo = new JFileChooser();
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("*CSV", "csv");
         seleccionarArchivo.setFileFilter(filtro);
         seleccionarArchivo.showOpenDialog(null);
-        fArchivoSeleccionado = seleccionarArchivo.getSelectedFile();
-        peliculasPath.setText(fArchivoSeleccionado.getAbsolutePath());
-
         try {
 
-            FileReader fr = new FileReader(fArchivoSeleccionado);
-            BufferedReader br = new BufferedReader(fr);
+            fArchivoSeleccionado = seleccionarArchivo.getSelectedFile();
+            peliculasPath.setText(fArchivoSeleccionado.getAbsolutePath());
 
-            String cadena;
-            this.fMovies = new Object[3];
-            while ((cadena = br.readLine()) != null) {
-                String registro[] = cadena.split(",");
-                this.fMovies[0] = registro[0];
-                this.fMovies[1] = registro[1];
-                this.fMovies[2] = registro[2];
+            int iFileSize = countLines(fArchivoSeleccionado.getAbsolutePath()) - 1;
+            if (iFileSize > 0) {
+                try (FileReader fr = new FileReader(fArchivoSeleccionado)) {//El try cierra el FileReader
+                    BufferedReader br = new BufferedReader(fr);
+                    br.readLine();//Esto es para leer el encabezado e ignorarlo
+
+                    String cadena;
+                    this.oMovies = new Object[iFileSize][3];
+                    for (int i = 0; i < iFileSize; i++) {
+                        cadena = br.readLine();
+                        String[] registro = cadena.split(",");
+                        this.oMovies[i][0] = registro[0];
+                        //System.out.println(this.oRelaciones[i][0]); trae el id_movie
+                        this.oMovies[i][1] = registro[1];
+                        //System.out.println(this.oRelaciones[i][1]); trae el title
+                        this.oMovies[i][1] = registro[2];
+                        //System.out.println(this.oRelaciones[i][2]); trae la fecha de lanzamiento
+                    }
+                }
+                img = new ImageIcon("src/Imagenes/comprobado.png");
+                this.isOkMovies = true;
+            } else {
+                //System.out.println("El numero de lineas debe ser mayor a 0 (sin contar el encabezado)");
+                img = new ImageIcon("src/Imagenes/boton-x.png");
+                JOptionPane.showMessageDialog(null, "El numero de lineas debe ser mayor a 0 (sin contar el encabezado)", "Error!", JOptionPane.ERROR_MESSAGE);
             }
-            ImageIcon img = new ImageIcon("src/Imagenes/comprobado.png");
-            checkPeliculas.setIcon(img);
 
         } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            ImageIcon img = new ImageIcon("src/Imagenes/boton-x.png");
-            checkPeliculas.setIcon(img);
+            //System.out.println("Error: " + ex.getMessage());
+            img = new ImageIcon("src/Imagenes/boton-x.png");
+            JOptionPane.showMessageDialog(null, "Revise que sea un archivo valido", "Error!", JOptionPane.ERROR_MESSAGE);
         }
-
+        checkPeliculas.setIcon(img);
     }//GEN-LAST:event_cargarPeliculasButtonActionPerformed
 
     private void procederButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procederButtonActionPerformed
-        // TODO add your handling code here:
-//        new Acceso().setVisible(true);
-//        this.setVisible(false);
+
+        if (this.isOkMovies && this.isOkActors && this.isOkRelaciones) {
+            
+            new Acceso().setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(null, "Revise que los archivos esten ok", "Warning!", JOptionPane.WARNING_MESSAGE);
+        }
+
     }//GEN-LAST:event_procederButtonActionPerformed
 
     public static int countLines(String filename) throws IOException {
