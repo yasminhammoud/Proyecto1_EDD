@@ -26,7 +26,7 @@ public class Main extends javax.swing.JFrame {
      * Creates new form Main
      */
     public Main() {
-        initComponents();
+        initComponents();//prueba
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
