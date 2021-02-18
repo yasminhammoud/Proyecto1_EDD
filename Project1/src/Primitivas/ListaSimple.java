@@ -98,6 +98,11 @@ public class ListaSimple {
         return null;
     }
     
+    //Indica si un elemento esta presente en la lista o no
+    public boolean contiene(NodoSimple o) {
+        return getIndex(o) >= 0;
+    }
+    
     //Obtiene un nodo a partir de su posicion/indice
     public NodoSimple getNodo(int iPos) {
         if(!this.esVacia() && iPos <= this.iSize) {

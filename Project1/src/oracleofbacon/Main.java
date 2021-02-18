@@ -283,7 +283,6 @@ public class Main extends javax.swing.JFrame {
     private void procederButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procederButtonActionPerformed
 
         if (this.isOkMovies && this.isOkActors && this.isOkRelaciones) {
-            
             new Acceso().setVisible(true);
             this.setVisible(false);
         } else {
