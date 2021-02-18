@@ -171,13 +171,13 @@ public class Main extends javax.swing.JFrame {
             } else {
                 //System.out.println("El numero de lineas debe ser mayor a 0 (sin contar el encabezado)");
                 img = new ImageIcon("src/Imagenes/boton-x.png");
-                JOptionPane.showMessageDialog(null, "El numero de lineas debe ser mayor a 0 (sin contar el encabezado)", "Error!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El número de líneas debe ser mayor a 0 (sin contar el encabezado)", "Error!", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Exception ex) {
             //System.out.println("Error: " + ex.getMessage());
             img = new ImageIcon("src/Imagenes/boton-x.png");
-            JOptionPane.showMessageDialog(null, "Revise que sea un archivo valido", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Revise que sea un archivo válido", "Error!", JOptionPane.ERROR_MESSAGE);
         }
         checkRelacion.setIcon(img);
     }//GEN-LAST:event_cargarRelacionButtonActionPerformed
@@ -220,13 +220,13 @@ public class Main extends javax.swing.JFrame {
             } else {
                 //System.out.println("El numero de lineas debe ser mayor a 0 (sin contar el encabezado)");
                 img = new ImageIcon("src/Imagenes/boton-x.png");
-                JOptionPane.showMessageDialog(null, "El numero de lineas debe ser mayor a 0 (sin contar el encabezado)", "Error!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El número de líneas debe ser mayor a 0 (sin contar el encabezado)", "Error!", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Exception ex) {
             //System.out.println("Error: " + ex.getMessage());
             img = new ImageIcon("src/Imagenes/boton-x.png");
-            JOptionPane.showMessageDialog(null, "Revise que sea un archivo valido", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Revise que sea un archivo válido", "Error!", JOptionPane.ERROR_MESSAGE);
         }
         checkActores.setIcon(img);
     }//GEN-LAST:event_cargarActoresButtonActionPerformed
@@ -269,13 +269,13 @@ public class Main extends javax.swing.JFrame {
             } else {
                 //System.out.println("El numero de lineas debe ser mayor a 0 (sin contar el encabezado)");
                 img = new ImageIcon("src/Imagenes/boton-x.png");
-                JOptionPane.showMessageDialog(null, "El numero de lineas debe ser mayor a 0 (sin contar el encabezado)", "Error!", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "El número de líneas debe ser mayor a 0 (sin contar el encabezado)", "Error!", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Exception ex) {
             //System.out.println("Error: " + ex.getMessage());
             img = new ImageIcon("src/Imagenes/boton-x.png");
-            JOptionPane.showMessageDialog(null, "Revise que sea un archivo valido", "Error!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Revise que sea un archivo válido", "Error!", JOptionPane.ERROR_MESSAGE);
         }
         checkPeliculas.setIcon(img);
     }//GEN-LAST:event_cargarPeliculasButtonActionPerformed
@@ -286,7 +286,7 @@ public class Main extends javax.swing.JFrame {
             new Acceso().setVisible(true);
             this.setVisible(false);
         } else {
-            JOptionPane.showMessageDialog(null, "Revise que los archivos esten ok", "Warning!", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Verifique que haya cargado todos los archivos de tipo CSV", "Warning!", JOptionPane.WARNING_MESSAGE);
         }
 
     }//GEN-LAST:event_procederButtonActionPerformed
