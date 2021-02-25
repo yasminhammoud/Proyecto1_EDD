@@ -211,7 +211,12 @@ public class Main extends javax.swing.JFrame {
                         //System.out.println(this.oRelaciones[i][0]); trae el id del actor
                         this.oActors[i][1] = registro[1];
                         //System.out.println(this.oRelaciones[i][1]); trae el nombre del actor
-                        this.oActors[i][2] = registro[2];
+                        if (registro[2] != null) {
+                            this.oActors[i][2] = registro[2];
+                        }
+                        else {
+                            this.oActors[i][2] = "-1";
+                        }
                         //System.out.println(this.oRelaciones[i][2]); trae la fecha de nacimiento
                     }
                 }
@@ -260,7 +265,12 @@ public class Main extends javax.swing.JFrame {
                         //System.out.println(this.oRelaciones[i][0]); trae el id_movie
                         this.oMovies[i][1] = registro[1];
                         //System.out.println(this.oRelaciones[i][1]); trae el title
-                        this.oMovies[i][2] = registro[2];
+                        if (registro[2] != null) {
+                            this.oMovies[i][2] = registro[2];
+                        }
+                        else {
+                            this.oMovies[i][2] = "-1";
+                        }
                         //System.out.println(this.oRelaciones[i][2]); trae la fecha de lanzamiento
                     }
                 }
@@ -283,8 +293,9 @@ public class Main extends javax.swing.JFrame {
     private void procederButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procederButtonActionPerformed
 
         if (this.isOkMovies && this.isOkActors && this.isOkRelaciones) {
-            new Acceso().setVisible(true);
-            this.setVisible(false);
+            GrafoMatriz grafo = new GrafoMatriz(this.oMovies.length);
+//            new Acceso().setVisible(true);
+//            this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Verifique que haya cargado todos los archivos de tipo CSV", "Warning!", JOptionPane.WARNING_MESSAGE);
         }

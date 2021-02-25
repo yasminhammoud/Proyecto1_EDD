@@ -3,49 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package oracleofbacon;
-
-import Primitivas.Actor;
+package Primitivas;
 
 /**
  *
  * @author fidel
  */
-public class Vertice {
-
-    String nombreVertice;
-    int numVertice;
+public class Actores {
     private Actor pFirst;//Apuntador al inicio
     private Actor pLast;//Apuntador al final
     private int iSize;
 
-    public Vertice(String x) {
-        this.nombreVertice = x;
-        this.numVertice = -1;
+    public Actores() {
         this.pFirst = null;
         this.pLast = null;
     }
 
-    public String nomVertice() // devuelve identificador del vértice
-    {
-        return this.nombreVertice;
-    }
-
-    public boolean equals(Vertice n) // true, si dos vértices son iguales
-    {
-        return this.nombreVertice.equals(n.nombreVertice);
-    }
-
-    public void asigVert(int n) // establece el número de vértices
-    {
-        this.numVertice = n;
-    }
-
-    public String toString() // características del vértice
-    {
-        return this.nombreVertice + " (" + this.numVertice + ")";
-    }
-    
     //Pregunta si la lista tiene un elemento y devuelve si es cierto o falso
     public boolean esVacia() {
         return this.pFirst == null;
@@ -57,7 +30,17 @@ public class Vertice {
         this.pLast = null;
         this.iSize = 0;
     }
-    
+
+    //Devuelve la data de un nodo
+//    public String leer(Actor pValor, String sTitle) {
+//        switch(sTitle) {
+//            case "I": return pValor.getsIdActor();
+//            case "N": return pValor.getsNombre();
+//            case "B": return pValor.getsNacimiento();
+//            default: return "-1";
+//        }
+//    }
+
     //Aniade un elemento al final haciendo que el que estaba anteriormente en la cola ahora apunte a este nuevo elemento y este nuevo elemento apunte a null
     public void annadirAlFinal(String sIdActor, String sNombre, String sNacimiento) {
         Actor pNuevo = new Actor(sIdActor, sNombre, sNacimiento);
@@ -68,9 +51,50 @@ public class Vertice {
             this.pLast = pNuevo;
         }
         this.iSize++;
-        this.nombreVertice += sIdActor + ",";
     }
-    
+
+    //Aniade un elemento al inicio 
+//    public void annadirAlInicio(Object oElemento) {
+//        Actor pNuevo = new Actor(oElemento);
+//        if (this.esVacia()) {
+//            this.setpFirst(this.pLast = pNuevo);
+//        } else {
+//            pNuevo.setpNext(this.getpFirst());
+//            this.setpFirst(pNuevo);
+//        }
+//        this.setiSize(this.getiSize() + 1);
+//    }
+
+//    public void eliminarAlInicio() {
+//        this.setpFirst(this.getpFirst().getpNext());
+//    }
+//
+//    public void eliminarAlFinal() {
+//        if (!this.esVacia()) {
+//
+//            Actor pActual = this.getpFirst();
+//            Actor pPrev = this.getpFirst();
+//            for (int i = 0; i < this.getiSize(); i++) {
+//                if (pActual != null) {
+//                    pPrev = pActual;
+//                    pActual = pActual.getpNext();
+//                }
+//            }
+//            this.setpLast(pPrev);
+//        }
+//    }
+
+    //Imprime cada elemento de la lista en una nueva linea
+//    public String imprimirLista() {
+//        String sListaCompleta = "";
+//        Actor pActual = this.getpFirst();
+//        while (pActual != null) {
+//            sListaCompleta += pActual.getOData() + "\n";
+//            pActual = pActual.getpNext();
+//        }
+//        return sListaCompleta;
+//    }
+
     //Devuelve el siguiente elemento a partir de un nodo como parametro
     public Actor proximo(Actor pPosicion) {
         if (pPosicion.getpNext() != null) {// verifico que el nodo que se envio por parametro no apunte a vacio
@@ -120,7 +144,26 @@ public class Vertice {
         }
         return false;
     }
-    
+
+//    public void reverso() {
+//        if (!this.esVacia()) {
+//            Object oData = this.getpFirst().getOData();
+//            this.reverso();
+//            this.annadirAlFinal(oData);
+//        }
+//    }
+
+//    public void removerRepetidos() {
+//        if (!this.esVacia()) {
+//            Object oData = this.getpFirst().getOData();
+//            this.eliminarAlInicio();
+//            this.removerRepetidos();
+//            if (!this.existe(oData)) {
+//                this.annadirAlInicio(oData);
+//            }
+//        }
+//    }
+
     //Obtiene un nodo a partir de su posicion/indice
     public Actor getNodo(int iPos) {
         if (!this.esVacia() && iPos <= this.getiSize()) {
