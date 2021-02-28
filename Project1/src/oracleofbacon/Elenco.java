@@ -39,12 +39,18 @@ public class Elenco extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Apollo 13", "A Few Good Men", "Forrest Gump", "The Princess Bride", "Rain Man" }));
         jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, 220, 40));
 
         jTextField1.setBackground(new java.awt.Color(255, 255, 0));
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, 250, 100));
 
         Btn_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salir.png"))); // NOI18N
+        Btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_SalirActionPerformed(evt);
+            }
+        });
         jPanel1.add(Btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 50, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo_elenco.png"))); // NOI18N
@@ -63,6 +69,10 @@ public class Elenco extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_SalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_Btn_SalirActionPerformed
 
     /**
      * @param args the command line arguments
