@@ -100,7 +100,7 @@ public class Busqueda extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_SalirActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_Btn_SalirActionPerformed
 
     private void Combo_Actor_OrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo_Actor_OrigenActionPerformed

@@ -47,12 +47,27 @@ public class Acceso extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 420, 100));
 
         Btn_Busquedad_por_pelicula.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton3.png"))); // NOI18N
+        Btn_Busquedad_por_pelicula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Busquedad_por_peliculaActionPerformed(evt);
+            }
+        });
         jPanel1.add(Btn_Busquedad_por_pelicula, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 330, 290, 50));
 
         Btn_Busquedad_por_separacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton1.png"))); // NOI18N
+        Btn_Busquedad_por_separacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Busquedad_por_separacionActionPerformed(evt);
+            }
+        });
         jPanel1.add(Btn_Busquedad_por_separacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 170, 440, 50));
 
         Btn_Busquedad_por_actor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton2.png"))); // NOI18N
+        Btn_Busquedad_por_actor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Busquedad_por_actorActionPerformed(evt);
+            }
+        });
         jPanel1.add(Btn_Busquedad_por_actor, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 250, 340, 50));
 
         Btn_mas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/boton4.png"))); // NOI18N
@@ -62,6 +77,11 @@ public class Acceso extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, 80, 70));
 
         Btn_salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salir.png"))); // NOI18N
+        Btn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_salirActionPerformed(evt);
+            }
+        });
         jPanel1.add(Btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, 40, 40));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/principal.png"))); // NOI18N
@@ -80,6 +100,31 @@ public class Acceso extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Btn_Busquedad_por_separacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Busquedad_por_separacionActionPerformed
+        
+        new Busqueda().setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_Btn_Busquedad_por_separacionActionPerformed
+
+    private void Btn_Busquedad_por_actorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Busquedad_por_actorActionPerformed
+        
+        new PeliculaInterfaz().setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_Btn_Busquedad_por_actorActionPerformed
+
+    private void Btn_Busquedad_por_peliculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Busquedad_por_peliculaActionPerformed
+        
+        new Elenco().setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_Btn_Busquedad_por_peliculaActionPerformed
+
+    private void Btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_salirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_Btn_salirActionPerformed
 
     /**
      * @param args the command line arguments
