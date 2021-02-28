@@ -5,6 +5,9 @@
  */
 package oracleofbacon;
 
+import Primitivas.ListaSimple;
+import Primitivas.NodoSimple;
+
 /**
  *
  * @author fidel
@@ -93,8 +96,7 @@ public class GrafoMatriz {
     }
 
     public void nuevoArco(String a, String b) throws Exception {
-        int va,
-         vb;
+        int va, vb;
         va  = numVertice(a);
         vb = numVertice(b);
         if (va  < 0 || vb < 0) {
@@ -133,6 +135,43 @@ public class GrafoMatriz {
 
     public void addRelacion(String[][] oRelacion) {
         this.oRelacion = oRelacion;
+    }
+
+    public String commonMovieID(ListaSimple actor1, ListaSimple actor2) {
+
+        ListaSimple pelisActor1 = actor1;   // Lista enlazada  A (peliculas en la que participa el actor 1)
+
+        ListaSimple pelisActor2 = actor2;  // Lista enlazada  B (peliculas en la que participa el actor 2)
+
+        NodoSimple headActor1 = pelisActor1.getpFirst();
+        NodoSimple headActor2 = pelisActor2.getpFirst();
+
+        String movieInCommon = "";
+
+        // Recorer lista A hasta el final
+        while (headActor1 != null) {
+
+            // Recorer lista B hasta el final
+            while (headActor2 != null) {
+
+                // if data is match then count increase 
+                if (headActor1.getOData() == headActor2.getOData()) {
+                    movieInCommon = headActor2.getsData();
+                }
+
+                // Cambiar apuntador al siguiente - Lista B 
+                headActor2 = pelisActor2.getpFirst().getPNext();
+            }
+
+            // Cambiar apuntador al siguiente - Lista A
+            headActor1 = pelisActor2.getpFirst().getPNext();
+
+            // Inicializar el punto de inicio de la Lista B
+            headActor2 = pelisActor2.getpFirst();
+        }
+
+        // retornar película en común
+        return movieInCommon;
     }
 
 }

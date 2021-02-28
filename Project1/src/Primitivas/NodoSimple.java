@@ -1,17 +1,19 @@
 package Primitivas;
 
 public class NodoSimple {
+
     private NodoSimple pNext;
     private String sData;
-    
+
     public NodoSimple(String sData) {
         this.sData = sData;
         this.pNext = null;
     }
-    
+
     public NodoSimple() {
-        
+
     }
+
     /**
      * @return the pNext
      */
@@ -39,6 +41,13 @@ public class NodoSimple {
     public void setsData(String sData) {
         this.sData = sData;
     }
-    
-    
+
+    public boolean getOData() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public NodoSimple getPNext() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
