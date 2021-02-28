@@ -7,6 +7,7 @@ package oracleofbacon;
 
 import Primitivas.ListaSimple;
 import Primitivas.NodoSimple;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,6 +40,9 @@ public class GrafoMatriz {
     }
 
     public void crearGrafo() {
+        String sActorId, sMovieId;
+        int iActorIndex, iMovieIndex;
+
         if (this.matAd == null) {
             this.matAd = new int[this.oActores.length][this.oActores.length];
             this.verts = new Vertice[this.oActores.length];
@@ -50,26 +54,46 @@ public class GrafoMatriz {
             this.numVerts = 0;
         }
 
-        String person_id, movie_id;
-        int person_index, movie_index;
-        
-        for(int i = 0; i < this.oRelacion.length; i++ ){
-            
-            person_id = this.oRelacion[i][0];
-            movie_id = this.oRelacion[i][1];
-            
-            person_index = id2indice_actor(person_id);
-            movie_index = id2indice_pelicula(movie_id);
-            
-            peliculas[ movie_index ].addActor(person_id);
-            actores[ person_index ].addPelicula(movie_id);
-            
-            for(int i = 0; i<actores.length; i++)
-                if( i!=person_index && actores[i].participoEn(movie_id) && actores[person_index].participoEn(movie_id) ){
-                    addRelacionSparse(i, person_index);
+        for (int i = 0; i < this.oRelacion.length; i++) {
+            sActorId = this.oRelacion[i][0];
+            sMovieId = this.oRelacion[i][1];
+
+            iActorIndex = getActorIndexFromActorId(sActorId);
+            iMovieIndex = getMovieIndexFromMovieId(sMovieId);
+
+            if (iActorIndex >= 0 || iMovieIndex >= 0) {
+
+                this.oPeliculas[iMovieIndex].agregarActor(sActorId);
+                this.oActores[iActorIndex].annadirPelicula(sMovieId);
+
+                for (int j = 0; j < this.oActores.length; j++) {
+                    if (j != iActorIndex && this.oActores[j].haceParteDe(sMovieId) && this.oActores[iActorIndex].haceParteDe(sMovieId)) {
+                        //???
+                    }
                 }
-            
+            } else {
+                JOptionPane.showMessageDialog(null, "Error");
+            }
+
         }
+    }
+
+    public int getActorIndexFromActorId(String sActorId) {
+        for (int i = 0; i < this.oActores.length; i++) {
+            if (this.oActores[i].getsIdActor().equals(sActorId)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int getMovieIndexFromMovieId(String sMovieId) {
+        for (int i = 0; i < this.oPeliculas.length; i++) {
+            if (this.oPeliculas[i].getSIdPelicula().equals(sMovieId)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void nuevoVertice(String nom) {
@@ -96,7 +120,8 @@ public class GrafoMatriz {
     }
 
     public void nuevoArco(String a, String b) throws Exception {
-        int va, vb;
+        int va,
+         vb;
         va  = numVertice(a);
         vb = numVertice(b);
         if (va  < 0 || vb < 0) {
