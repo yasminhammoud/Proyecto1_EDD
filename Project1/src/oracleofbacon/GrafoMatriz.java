@@ -37,22 +37,35 @@ public class GrafoMatriz {
 
     public void crearGrafo() {
         if (this.matAd == null) {
-            this.matAd = new int[this.oPeliculas.length][this.oPeliculas.length];
-            this.verts = new Vertice[this.oPeliculas.length];
-            for (int i = 0; i < this.oPeliculas.length; i++) {
-                for (int j = 0; i < this.oPeliculas.length; i++) {
+            this.matAd = new int[this.oActores.length][this.oActores.length];
+            this.verts = new Vertice[this.oActores.length];
+            for (int i = 0; i < this.oActores.length; i++) {
+                for (int j = 0; i < this.oActores.length; i++) {
                     this.matAd[i][j] = 0;
                 }
             }
             this.numVerts = 0;
+        }
 
-            String[][] tempArray = this.oRelacion;
-//        for (int i = 0; i < this.oRelacion.length; i++) {
-//            String peliculaTemp = tempArray[i];
-//        }
-            while (tempArray.length > 0) {
-
-            }
+        String person_id, movie_id;
+        int person_index, movie_index;
+        
+        for(int i = 0; i < this.oRelacion.length; i++ ){
+            
+            person_id = this.oRelacion[i][0];
+            movie_id = this.oRelacion[i][1];
+            
+            person_index = id2indice_actor(person_id);
+            movie_index = id2indice_pelicula(movie_id);
+            
+            peliculas[ movie_index ].addActor(person_id);
+            actores[ person_index ].addPelicula(movie_id);
+            
+            for(int i = 0; i<actores.length; i++)
+                if( i!=person_index && actores[i].participoEn(movie_id) && actores[person_index].participoEn(movie_id) ){
+                    addRelacionSparse(i, person_index);
+                }
+            
         }
     }
 
