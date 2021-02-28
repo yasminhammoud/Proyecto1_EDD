@@ -62,7 +62,7 @@ public class Acceso extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 40, 80, 70));
 
         Btn_salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salir.png"))); // NOI18N
-        jPanel1.add(Btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 40, 40));
+        jPanel1.add(Btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, 40, 40));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/principal.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 500));

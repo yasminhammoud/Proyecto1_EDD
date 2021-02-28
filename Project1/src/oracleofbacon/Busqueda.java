@@ -50,8 +50,18 @@ public class Busqueda extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ActorDes.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 200, 40));
 
+        Combo_Actor_Origen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo_Actor_OrigenActionPerformed(evt);
+            }
+        });
         jPanel1.add(Combo_Actor_Origen, new org.netbeans.lib.awtextra.AbsoluteConstraints(516, 30, 200, 40));
 
+        Combo_Actor_Destino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Combo_Actor_DestinoActionPerformed(evt);
+            }
+        });
         jPanel1.add(Combo_Actor_Destino, new org.netbeans.lib.awtextra.AbsoluteConstraints(516, 100, 200, 40));
 
         Btn_DFS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/DFS.png"))); // NOI18N
@@ -65,7 +75,12 @@ public class Busqueda extends javax.swing.JFrame {
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 450, 150));
 
         Btn_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salir.png"))); // NOI18N
-        jPanel1.add(Btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 50, 40));
+        Btn_Salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_SalirActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 40, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo_busquedad.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
@@ -83,6 +98,18 @@ public class Busqueda extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Btn_SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_SalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_SalirActionPerformed
+
+    private void Combo_Actor_OrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo_Actor_OrigenActionPerformed
+        String actorOrigen = Combo_Actor_Origen.getSelectedItem().toString();
+    }//GEN-LAST:event_Combo_Actor_OrigenActionPerformed
+
+    private void Combo_Actor_DestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Combo_Actor_DestinoActionPerformed
+         String actorDestino = Combo_Actor_Destino.getSelectedItem().toString();
+    }//GEN-LAST:event_Combo_Actor_DestinoActionPerformed
 
     /**
      * @param args the command line arguments

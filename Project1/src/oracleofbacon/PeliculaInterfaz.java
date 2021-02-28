@@ -43,7 +43,7 @@ public class PeliculaInterfaz extends javax.swing.JFrame {
         jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 330, 100));
 
         Btn_Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/salir.png"))); // NOI18N
-        jPanel1.add(Btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 0, 50, 40));
+        jPanel1.add(Btn_Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 10, 40, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo_pelicula.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 450));
