@@ -2,10 +2,10 @@ package Primitivas;
 
 public class NodoSimple {
     private NodoSimple pNext;
-    private Object oData;//strings y enteros
+    private String sData;
     
-    public NodoSimple(Object oData) {
-        this.oData = oData;
+    public NodoSimple(String sData) {
+        this.sData = sData;
         this.pNext = null;
     }
     
@@ -15,29 +15,29 @@ public class NodoSimple {
     /**
      * @return the pNext
      */
-    public NodoSimple getPNext() {
+    public NodoSimple getpNext() {
         return pNext;
     }
 
     /**
      * @param pNext the pNext to set
      */
-    public void setPNext(NodoSimple pNext) {
+    public void setpNext(NodoSimple pNext) {
         this.pNext = pNext;
     }
 
     /**
      * @return the data
      */
-    public Object getOData() {
-        return oData;
+    public String getsData() {
+        return sData;
     }
 
     /**
      * @param data the data to set
      */
-    public void setOData(Object data) {
-        this.oData = data;
+    public void setsData(String sData) {
+        this.sData = sData;
     }
     
     

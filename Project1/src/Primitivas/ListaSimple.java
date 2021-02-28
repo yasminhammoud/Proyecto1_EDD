@@ -22,36 +22,36 @@ public class ListaSimple {
     }
 
     //Devuelve la data de un nodo
-    public Object leer(NodoSimple pValor) {
-        return pValor.getOData();
+    public String leer(int pValor) {
+      return getNodo(pValor).getsData();
     }
 
     //Aniade un elemento al final haciendo que el que estaba anteriormente en la cola ahora apunte a este nuevo elemento y este nuevo elemento apunte a null
-    public void annadirAlFinal(Object oElemento) {
-        NodoSimple pNuevo = new NodoSimple(oElemento);
+    public void annadirAlFinal(String sData) {
+        NodoSimple pNuevo = new NodoSimple(sData);
         if (this.esVacia()) {
             this.pFirst = this.pLast = pNuevo;
         } else {
-            this.pLast.setPNext(pNuevo);
+            this.pLast.setpNext(pNuevo);
             this.pLast = pNuevo;
         }
         this.iSize++;
     }
 
     //Aniade un elemento al inicio 
-    public void annadirAlInicio(Object oElemento) {
-        NodoSimple pNuevo = new NodoSimple(oElemento);
+    public void annadirAlInicio(String sData) {
+        NodoSimple pNuevo = new NodoSimple(sData);
         if (this.esVacia()) {
             this.pFirst = this.pLast = pNuevo;
         } else {
-            pNuevo.setPNext(this.pFirst);
+            pNuevo.setpNext(this.pFirst);
             this.pFirst = pNuevo;
         }
         this.iSize++;
     }
 
     public void eliminarAlInicio() {
-        this.pFirst = this.pFirst.getPNext();
+        this.pFirst = this.pFirst.getpNext();
     }
 
     public void eliminarAlFinal() {
@@ -62,7 +62,7 @@ public class ListaSimple {
             for (int i = 0; i < this.iSize; i++) {
                 if (pActual != null) {
                     pPrev = pActual;
-                    pActual = pActual.getPNext();
+                    pActual = pActual.getpNext();
                 }
             }
             this.pLast = pPrev;
@@ -74,16 +74,16 @@ public class ListaSimple {
         String sListaCompleta = "";
         NodoSimple pActual = this.pFirst;
         while (pActual != null) {
-            sListaCompleta += pActual.getOData() + "\n";
-            pActual = pActual.getPNext();
+            sListaCompleta += pActual.getsData() + "\n";
+            pActual = pActual.getpNext();
         }
         return sListaCompleta;
     }
 
     //Devuelve el siguiente elemento a partir de un nodo como parametro
     public NodoSimple proximo(NodoSimple pPosicion) {
-        if (pPosicion.getPNext() != null) {// verifico que el nodo que se envio por parametro no apunte a vacio
-            pPosicion = pPosicion.getPNext();
+        if (pPosicion.getpNext() != null) {// verifico que el nodo que se envio por parametro no apunte a vacio
+            pPosicion = pPosicion.getpNext();
             return pPosicion;
         } else {// Si apunta a vacio devuelve null
             return null;
@@ -117,36 +117,22 @@ public class ListaSimple {
     public boolean contiene(NodoSimple o) {
         return getIndex(o) >= 0;
     }
+    
+    //Indica si un elemento esta presente en la lista o no
+    public boolean contiene(String o) {
+        return getIndex(o) >= 0;
+    }
 
     //Indica si un elemento existe
-    public boolean existe(Object oData) {
+    public boolean existe(String sData) {
         NodoSimple pAux = this.pFirst;
         while (pAux != null) {
-            if (pAux.getOData().equals(oData)) {
+            if (pAux.getsData().equals(sData)) {
                 return true;
             }
-            pAux = pAux.getPNext();
+            pAux = pAux.getpNext();
         }
         return false;
-    }
-
-    public void reverso() {
-        if (!this.esVacia()) {
-            Object oData = this.pFirst.getOData();
-            this.reverso();
-            this.annadirAlFinal(oData);
-        }
-    }
-
-    public void removerRepetidos() {
-        if (!this.esVacia()) {
-            Object oData = this.pFirst.getOData();
-            this.eliminarAlInicio();
-            this.removerRepetidos();
-            if (!this.existe(oData)) {
-                this.annadirAlInicio(oData);
-            }
-        }
     }
 
     //Obtiene un nodo a partir de su posicion/indice
@@ -161,7 +147,7 @@ public class ListaSimple {
         return null;
     }
 
-    //Obtiene el indice de un nodo y lo retorna
+    //Obtiene el indice de un nodo a partir de un nodo y lo retorna
     public int getIndex(NodoSimple pNodo) {
         if (!this.esVacia()) {
             NodoSimple pAux = pFirst;
@@ -174,46 +160,60 @@ public class ListaSimple {
         }
         return -1;
     }
+    
+    //Obtiene el indice de un nodo a partir de un valor y lo retorna
+    public int getIndex(String sData) {
+        if (!this.esVacia()) {
+            NodoSimple pAux = pFirst;
+            int iCont = 0;
+            while (pAux.getsData() != sData) {
+                iCont++;
+                pAux = proximo(pAux);
+            }
+            return iCont;
+        }
+        return -1;
+    }
 
     /**
      * @return the pFirst
      */
-    public NodoSimple getPFirst() {
+    public NodoSimple getpFirst() {
         return this.pFirst;
     }
 
     /**
      * @param pFirst the pFirst to set
      */
-    public void setPFirst(NodoSimple pFirst) {
+    public void setpFirst(NodoSimple pFirst) {
         this.pFirst = pFirst;
     }
 
     /**
      * @return the pLast
      */
-    public NodoSimple getPLast() {
+    public NodoSimple getpLast() {
         return this.pLast;
     }
 
     /**
      * @param pLast the pLast to set
      */
-    public void setPLast(NodoSimple pLast) {
+    public void setpLast(NodoSimple pLast) {
         this.pLast = pLast;
     }
 
     /**
      * @return the iSize
      */
-    public int getISize() {
+    public int getiSize() {
         return this.iSize;
     }
 
     /**
      * @param iSize the iSize to set
      */
-    public void setISize(int iSize) {
+    public void setiSize(int iSize) {
         this.iSize = iSize;
     }
 }

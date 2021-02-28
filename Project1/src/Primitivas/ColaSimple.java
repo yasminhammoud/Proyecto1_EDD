@@ -18,7 +18,7 @@ public class ColaSimple {
     }
 
     //Agregar vértice al final de la cola 
-    void enQueue(Object vertex) {
+    void enQueue(String vertex) {
 
         NodoSimple newVertex = new NodoSimple(vertex);
 
@@ -27,23 +27,23 @@ public class ColaSimple {
             front = rear = newVertex;
         } else {
             //Se agrega un nuevo nodo al final de la cola, y se cambia el "rear" 
-            rear.setPNext(newVertex);
+            rear.setpNext(newVertex);
             rear = newVertex;
         }
     }
     
     // Eliminar el primer elemento de la cola 
-    public Object deQueue() { // Cambir a Vertice
+    public String deQueue() { // Cambir a Vertice
         if (!isEmpty()) {
             // Se almacena el primer elemento para devolverlo, antes de eliminarlo
             NodoSimple tempVertex = front;
-            front = front.getPNext();
+            front = front.getpNext();
 
             // Si el inicio se vuelve NULL, entonces "reseteamos la cola"
             if (front == null) {
                 rear = null;
             }
-            return tempVertex.getOData();
+            return tempVertex.getsData();
         } else {
             return null;
         }

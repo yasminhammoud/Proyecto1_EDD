@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class Main extends javax.swing.JFrame {
 
-    Object[][] oRelaciones, oMovies, oActors;
+    GrafoMatriz grafo = new GrafoMatriz();
     boolean isOkRelaciones = false, isOkMovies = false, isOkActors = false;
 
     /**
@@ -156,15 +156,16 @@ public class Main extends javax.swing.JFrame {
                     br.readLine();//Esto es para leer el encabezado e ignorarlo
 
                     String cadena;
-                    this.oRelaciones = new Object[iFileSize][2];
+                    String[][] oRelaciones = new String[iFileSize][2];
                     for (int i = 0; i < iFileSize; i++) {
                         cadena = br.readLine();
                         String[] registro = cadena.split(",");
-                        this.oRelaciones[i][0] = registro[0];
+                        oRelaciones[i][0] = registro[0];
                         //System.out.println(this.oRelaciones[i][0]); trae el person id
-                        this.oRelaciones[i][1] = registro[1];
+                        oRelaciones[i][1] = registro[1];
                         //System.out.println(this.oRelaciones[i][1]); trae el movie id
                     }
+                    this.grafo.addRelacion(oRelaciones);
                 }
                 img = new ImageIcon("src/Imagenes/comprobado.png");
                 this.isOkRelaciones = true;
@@ -202,23 +203,19 @@ public class Main extends javax.swing.JFrame {
                     BufferedReader br = new BufferedReader(fr);
                     br.readLine();//Esto es para leer el encabezado e ignorarlo
 
+                    Actor[] oActores = new Actor[iFileSize];
                     String cadena;
-                    this.oActors = new Object[iFileSize][3];
                     for (int i = 0; i < iFileSize; i++) {
                         cadena = br.readLine();
                         String[] registro = cadena.split(",");
-                        this.oActors[i][0] = registro[0];
-                        //System.out.println(this.oRelaciones[i][0]); trae el id del actor
-                        this.oActors[i][1] = registro[1];
-                        //System.out.println(this.oRelaciones[i][1]); trae el nombre del actor
                         if (registro[2] != null) {
-                            this.oActors[i][2] = registro[2];
+                            oActores[i] = new Actor(registro[0], registro[1], registro[2]);
                         }
                         else {
-                            this.oActors[i][2] = "-1";
+                            oActores[i] = new Actor(registro[0], registro[1], "-1");
                         }
-                        //System.out.println(this.oRelaciones[i][2]); trae la fecha de nacimiento
                     }
+                    this.grafo.addActores(oActores);
                 }
                 img = new ImageIcon("src/Imagenes/comprobado.png");
                 this.isOkActors = true;
@@ -256,23 +253,20 @@ public class Main extends javax.swing.JFrame {
                     BufferedReader br = new BufferedReader(fr);
                     br.readLine();//Esto es para leer el encabezado e ignorarlo
 
+                    
+                    Pelicula[] oPeliculas = new Pelicula[iFileSize];
                     String cadena;
-                    this.oMovies = new Object[iFileSize][3];
                     for (int i = 0; i < iFileSize; i++) {
                         cadena = br.readLine();
                         String[] registro = cadena.split(",");
-                        this.oMovies[i][0] = registro[0];
-                        //System.out.println(this.oRelaciones[i][0]); trae el id_movie
-                        this.oMovies[i][1] = registro[1];
-                        //System.out.println(this.oRelaciones[i][1]); trae el title
                         if (registro[2] != null) {
-                            this.oMovies[i][2] = registro[2];
+                            oPeliculas[i] = new Pelicula(registro[0], registro[1], registro[2]);
                         }
                         else {
-                            this.oMovies[i][2] = "-1";
+                            oPeliculas[i] = new Pelicula(registro[0], registro[1], "-1");
                         }
-                        //System.out.println(this.oRelaciones[i][2]); trae la fecha de lanzamiento
                     }
+                    this.grafo.addPeliculas(oPeliculas);
                 }
                 img = new ImageIcon("src/Imagenes/comprobado.png");
                 this.isOkMovies = true;
@@ -293,9 +287,9 @@ public class Main extends javax.swing.JFrame {
     private void procederButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procederButtonActionPerformed
 
         if (this.isOkMovies && this.isOkActors && this.isOkRelaciones) {
-            GrafoMatriz grafo = new GrafoMatriz(this.oMovies.length);
-//            new Acceso().setVisible(true);
-//            this.setVisible(false);
+            grafo.crearGrafo();
+            new Acceso().setVisible(true);
+            this.setVisible(false);
         } else {
             JOptionPane.showMessageDialog(null, "Verifique que haya cargado todos los archivos de tipo CSV", "Warning!", JOptionPane.WARNING_MESSAGE);
         }

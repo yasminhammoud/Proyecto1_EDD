@@ -22,27 +22,27 @@ public class PilaSimple {
     }
 
     // Agregar elemento en la cima de la pila 
-    public void push(Object vertex) {
+    public void push(String vertex) {
 
         NodoSimple newVertex = new NodoSimple(vertex);
 
         if (isEmpty()) {
             top = newVertex;
         } else {
-            newVertex.setPNext(top);
+            newVertex.setpNext(top);
             top = newVertex;
         }
     }
 
     // Eliminar elemento de la cima de la pila    --- HAY QUE VERIFICAR SI ESTO DEBE DEVOLVER EL NODO ---- 
-    public Object pop() {
+    public String pop() {
 
         if (isEmpty()) {
             return null;
         } else {
             NodoSimple tempVertex = top;
-            top = top.getPNext();
-            return tempVertex.getOData();
+            top = top.getpNext();
+            return tempVertex.getsData();
         }
     }
 

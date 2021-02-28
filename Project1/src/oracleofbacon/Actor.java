@@ -3,42 +3,47 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Primitivas;
+package oracleofbacon;
+
+import Primitivas.ListaSimple;
 
 /**
  *
  * @author fidel
  */
 public class Actor {
-    
-    private Actor pNext;
+
     private String sIdActor;
     private String sNombre;
     private String sNacimiento;
-    
+    ListaSimple lsMovies;
+
     public Actor() {
-        
+
     }
-    
+
     public Actor(String sIdActor, String sNombre, String sNacimiento) {
         this.sIdActor = sIdActor;
         this.sNombre = sNombre;
         this.sNacimiento = sNacimiento;
-        this.pNext = null;
+        this.lsMovies = new ListaSimple();
     }
 
-    /**
-     * @return the pNext
-     */
-    public Actor getpNext() {
-        return pNext;
+    public void annadirPelicula(String sIdMovie) {
+        lsMovies.annadirAlFinal(sIdMovie);
     }
 
-    /**
-     * @param pNext the pNext to set
-     */
-    public void setpNext(Actor pNext) {
-        this.pNext = pNext;
+    public boolean haceParteDe(String sIdMovie) {
+        return lsMovies.contiene(sIdMovie);
+    }
+
+    public String[] getIDsMovies() {
+        //Esta funcion devuelve un array con los id de las peliculas
+        String moviesArray[] = new String[lsMovies.getiSize()];
+
+        for (int i = 0; i < lsMovies.getiSize(); i++) moviesArray[i] = lsMovies.leer(i);
+        
+        return moviesArray;
     }
 
     /**
@@ -82,6 +87,4 @@ public class Actor {
     public void setsNacimiento(String sNacimiento) {
         this.sNacimiento = sNacimiento;
     }
-    
-    
 }
