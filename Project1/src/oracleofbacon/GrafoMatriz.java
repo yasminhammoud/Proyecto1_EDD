@@ -69,7 +69,7 @@ public class GrafoMatriz {
     }
 
     //busca el vértice en el array. Devuelve -1 si no lo encuentra:
-    int numVertice(String vs) {
+    public int numVertice(String vs) {
         Vertice v = new Vertice(vs);
         boolean encontrado = false;
         int i = 0;
@@ -159,6 +159,10 @@ public class GrafoMatriz {
 
         // retornar película en común
         return movieInCommon;
+    }
+    
+    public int getNumVerts() {
+        return numVerts;
     }
 
 }

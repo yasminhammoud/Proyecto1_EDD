@@ -7,10 +7,12 @@ package Primitivas;
 public class ColaSimple {
 
     private NodoSimple front, rear;
+    private int size;
 
     public ColaSimple() {
         this.front = null;
         this.rear = null;
+        this.size = 0;
     }
 
     public boolean isEmpty() {
@@ -30,8 +32,9 @@ public class ColaSimple {
             rear.setpNext(newVertex);
             rear = newVertex;
         }
+        size++;
     }
-    
+
     // Eliminar el primer elemento de la cola 
     public String deQueue() { // Cambir a Vertice
         if (!isEmpty()) {
@@ -43,6 +46,7 @@ public class ColaSimple {
             if (front == null) {
                 rear = null;
             }
+            size--;
             return tempVertex.getsData();
         } else {
             return null;
@@ -50,4 +54,3 @@ public class ColaSimple {
     }
 
 }
-
