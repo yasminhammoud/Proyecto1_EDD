@@ -17,42 +17,34 @@ public class TraverseGraph {
     // Primer camino encontrado - Grados de separación BFS //
     public String[] BreadthFirstSearch(GrafoMatriz graph, String source, String destination) {
 
-        String edges;
+        //String edges;
         int startingVertex;
         String[] searchRoute;
         startingVertex = graph.numVertice(source);
-        if (startingVertex < 0) {
-            JOptionPane.showMessageDialog(null, "El vértice origen no existe");
-        }
+        //if (startingVertex < 0) {
+            //JOptionPane.showMessageDialog(null, "El vértice origen no existe");
+        //}
         ColaSimple cola = new ColaSimple();
-
         boolean visited[] = new boolean[graph.getNumVerts()];
-
         searchRoute = new String[graph.getNumVerts()];
+        
+         // vértice origen queda marcado
+        visited[startingVertex] = true;
+        searchRoute[startingVertex] = source;
 
-        // inicializa los vértices como no marcados
-        for (int i = 0; i < graph.getNumVerts(); i++) {
-            searchRoute[i] = "";
-        }
+        cola.enQueue(source);
 
-        searchRoute[startingVertex] = ""; // vértice origen queda marcado
+        while (cola.getFront().getsData() != destination) {
 
-        cola.enQueue(String.valueOf(startingVertex));
-
-        while (!cola.isEmpty()) {
-
-            int frontQueue;
-            String vertexEliminated = cola.deQueue();
-            frontQueue = Integer.parseInt(vertexEliminated);
-
-            //System.out.println("Vértice " + graph.verts[w] + "visitado");
-            
+            String frontQueue = cola.deQueue();
+            searchRoute[graph.numVertice(frontQueue)] = frontQueue;
+                 
             // inserta en la cola los adyacentes de w no marcados
-            for (int u = 0; u < graph.getNumVerts(); u++) {
-              //  if ((graph.matAd[w][u] == 1) && (m[u] == true)) {
-// se marca vertice u con número de arcos hasta el
-                 ///   m[u] = m[w] + 1;
-                    cola.enQueue(String.valueOf(u));
+            for (int i = 0; i < graph.getNumVerts(); i++) {
+              //  if ((graph.matAd[w][u] == 1) && (visited[i] == false)) {
+             // se marca vertice u con número de arcos hasta el
+             //   m[u] = m[w] + 1;
+                    cola.enQueue(String.valueOf(i));
                 }
             }
         return searchRoute;

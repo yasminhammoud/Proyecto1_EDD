@@ -53,4 +53,29 @@ public class ColaSimple {
         }
     }
 
+    public NodoSimple getFront() {
+        return front;
+    }
+
+    public void setFront(NodoSimple front) {
+        this.front = front;
+    }
+
+    public NodoSimple getRear() {
+        return rear;
+    }
+
+    public void setRear(NodoSimple rear) {
+        this.rear = rear;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+    
+
 }
