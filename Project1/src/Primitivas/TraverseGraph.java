@@ -5,7 +5,7 @@
  */
 package Primitivas;
 
-import javax.swing.JOptionPane;
+
 import oracleofbacon.GrafoMatriz;
 
 /**
@@ -34,22 +34,23 @@ public class TraverseGraph {
 
         cola.enQueue(source);
 
-        while (cola.getFront().getsData() != destination) {
+        while (cola.getFront().getsData() == null ? destination != null : !cola.getFront().getsData().equals(destination)) {
 
             String frontQueue = cola.deQueue();
-            searchRoute[graph.numVertice(frontQueue)] = frontQueue;
+            int positionFront = graph.numVertice(frontQueue);
+            searchRoute[positionFront] = frontQueue;
                  
-            // inserta en la cola los adyacentes de w no marcados
-            for (int i = 0; i < graph.getNumVerts(); i++) {
-              //  if ((graph.matAd[w][u] == 1) && (visited[i] == false)) {
+            // inserta en la cola los adyacentes no marcados
+            //for (int i = 0; i < graph.getNumVerts(); i++) {
+               //if ((graph.getMatAd()[positionFront][i] == 1) && (visited[i] == false)) {
              // se marca vertice u con número de arcos hasta el
-             //   m[u] = m[w] + 1;
-                    cola.enQueue(String.valueOf(i));
+             //   m[i] = m[w] + 1;
+              //      cola.enQueue(graph.getVertex(i));
+              //}
                 }
-            }
         return searchRoute;
     }
-
+}
     // Todos los caminos encontrados 
     /*
         public String[] allRoutesBFS(GrafoMatriz graph, String source, String destination) {
@@ -57,4 +58,5 @@ public class TraverseGraph {
         return array;
         }
      */
-}
+
+

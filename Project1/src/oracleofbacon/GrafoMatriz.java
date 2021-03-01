@@ -21,13 +21,18 @@ public class GrafoMatriz {
     int numVerts;
     static int maxVerts = 20;
     Vertice[] verts;
-    int[][] matAd;
+    private int[][] matAd;
 
     //Constructor
     public GrafoMatriz() {
         this(maxVerts);
     }
 
+    public int[][] getMatAd() {
+        return matAd;
+    }
+
+    
     public GrafoMatriz(int mx) {
         this.matAd = new int[mx][mx];
         this.verts = new Vertice[mx];
