@@ -1,9 +1,7 @@
 package Primitivas;
 
-/**
- *
- * @author Yasmin Hammoud
- */
+
+// *********** EQUIPO *********** FIDEL BARREAT - ALEJANDRO GUZMAN - YASMIN HAMMOUD
 public class ColaSimple {
 
     private NodoSimple front, rear;

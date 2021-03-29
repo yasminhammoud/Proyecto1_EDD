@@ -8,10 +8,8 @@ package Primitivas;
 
 import oracleofbacon.GrafoMatriz;
 
-/**
- *
- * @author Yasmin Hammoud
- */
+
+// *********** EQUIPO *********** FIDEL BARREAT - ALEJANDRO GUZMAN - YASMIN HAMMOUD
 public class TraverseGraph {
 
     // Primer camino encontrado - Grados de separación BFS //

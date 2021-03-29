@@ -7,10 +7,8 @@ package oracleofbacon;
 
 import Primitivas.ListaSimple;
 
-/**
- *
- * @author fidel
- */
+
+// *********** EQUIPO *********** FIDEL BARREAT - ALEJANDRO GUZMAN - YASMIN HAMMOUD
 public class Actor {
 
     private String sIdActor;

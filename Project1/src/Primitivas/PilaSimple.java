@@ -5,10 +5,7 @@
  */
 package Primitivas;
 
-/**
- *
- * @author Yasmin Hammoud
- */
+// *********** EQUIPO *********** FIDEL BARREAT - ALEJANDRO GUZMAN - YASMIN HAMMOUD
 public class PilaSimple {
 
     private NodoSimple top;

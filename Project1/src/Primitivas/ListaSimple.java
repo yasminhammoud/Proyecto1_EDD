@@ -1,5 +1,6 @@
 package Primitivas;
 
+// *********** EQUIPO *********** FIDEL BARREAT - ALEJANDRO GUZMAN - YASMIN HAMMOUD
 public class ListaSimple {
 
     private NodoSimple pFirst;//Apuntador al inicio
@@ -166,11 +167,16 @@ public class ListaSimple {
         if (!this.esVacia()) {
             NodoSimple pAux = pFirst;
             int iCont = 0;
-            while (pAux.getsData() != sData) {
+            while (pAux != null && pAux.getsData() != sData) {
                 iCont++;
                 pAux = proximo(pAux);
             }
-            return iCont;
+            if (pAux != null) {
+                return iCont;
+            }
+            else {
+                return -1;
+            }
         }
         return -1;
     }

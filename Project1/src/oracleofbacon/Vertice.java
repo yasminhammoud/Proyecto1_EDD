@@ -5,38 +5,78 @@
  */
 package oracleofbacon;
 
-/**
- *
- * @author fidel
- */
+// *********** EQUIPO *********** FIDEL BARREAT - ALEJANDRO GUZMAN - YASMIN HAMMOUD
 public class Vertice {
 
-    String nombreVertice;
-    int numVertice;
+    private String nombreVertice;
+    private String pelicula;
+    private int numVertice;
 
-    public Vertice(String x) {
-        this.nombreVertice = x;
+    public Vertice(String nombreVertice) {
+        this.nombreVertice = nombreVertice;
         this.numVertice = -1;
     }
 
     public String nomVertice() // devuelve identificador del vértice
     {
-        return this.nombreVertice;
+        return this.getNombreVertice();
     }
 
     public boolean equals(Vertice n) // true, si dos vértices son iguales
     {
-        return this.nombreVertice.equals(n.nombreVertice);
+        return this.getNombreVertice().equals(n.getNombreVertice());
     }
 
     public void asigVert(int n) // establece el número de vértices
     {
-        this.numVertice = n;
+        this.setNumVertice(n);
     }
 
     public String toString() // características del vértice
     {
-        return this.nombreVertice + " (" + this.numVertice + ")";
+        return this.getNombreVertice() + " (" + this.getNumVertice() + ")";
+    }
+
+    /**
+     * @return the nombreVertice
+     */
+    public String getNombreVertice() {
+        return nombreVertice;
+    }
+
+    /**
+     * @param nombreVertice the nombreVertice to set
+     */
+    public void setNombreVertice(String nombreVertice) {
+        this.nombreVertice = nombreVertice;
+    }
+
+    /**
+     * @return the numVertice
+     */
+    public int getNumVertice() {
+        return numVertice;
+    }
+
+    /**
+     * @param numVertice the numVertice to set
+     */
+    public void setNumVertice(int numVertice) {
+        this.numVertice = numVertice;
+    }
+
+    /**
+     * @return the pelicula
+     */
+    public String getPelicula() {
+        return pelicula;
+    }
+
+    /**
+     * @param pelicula the pelicula to set
+     */
+    public void setPelicula(String pelicula) {
+        this.pelicula = pelicula;
     }
     
 }

@@ -9,15 +9,14 @@ import Primitivas.ListaSimple;
 import Primitivas.NodoSimple;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author fidel
- */
+
+// *********** EQUIPO *********** FIDEL BARREAT - ALEJANDRO GUZMAN - YASMIN HAMMOUD
 public class GrafoMatriz {
 
     Pelicula[] oPeliculas;
     Actor[] oActores;
     String[][] oRelacion;
+    ListaSimple[] duplas;
     int numVerts;
     static int maxVerts = 20;
     Vertice[] verts;
@@ -34,13 +33,6 @@ public class GrafoMatriz {
 
     
     public GrafoMatriz(int mx) {
-        this.matAd = new int[mx][mx];
-        this.verts = new Vertice[mx];
-        for (int i = 0; i < mx; i++) {
-            for (int j = 0; i < mx; i++) {
-                this.matAd[i][j] = 0;
-            }
-        }
         this.numVerts = 0;
     }
 
@@ -49,10 +41,10 @@ public class GrafoMatriz {
         int iActorIndex, iMovieIndex;
 
         if (this.matAd == null) {
-            this.matAd = new int[this.oActores.length][this.oActores.length];
+            this.matAd = new int[this.oPeliculas.length][this.oPeliculas.length];
             this.verts = new Vertice[this.oActores.length];
-            for (int i = 0; i < this.oActores.length; i++) {
-                for (int j = 0; i < this.oActores.length; i++) {
+            for (int i = 0; i < this.oPeliculas.length; i++) {
+                for (int j = 0; i < this.oPeliculas.length; i++) {
                     this.matAd[i][j] = 0;
                 }
             }
@@ -69,17 +61,48 @@ public class GrafoMatriz {
             if (iActorIndex >= 0 || iMovieIndex >= 0) {
 
                 this.oPeliculas[iMovieIndex].agregarActor(sActorId);
+                System.out.println(this.oPeliculas[iMovieIndex].getsTitle() + " se le agrego el actor " + sActorId);
                 this.oActores[iActorIndex].annadirPelicula(sMovieId);
-
-                for (int j = 0; j < this.oActores.length; j++) {
-                    if (j != iActorIndex && this.oActores[j].haceParteDe(sMovieId) && this.oActores[iActorIndex].haceParteDe(sMovieId)) {
-                        //???
-                    }
-                }
+                System.out.println(this.oActores[iActorIndex].getsNombre() + " se le agrego la pelicula " + sMovieId);
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Error");
             }
 
+        }
+        
+        crearVertices();
+        crearArcos();
+        for (int i = 0; i < this.matAd.length; i++) {
+            for (int j = 0; j < this.matAd[i].length; j++) {
+                System.out.print(this.matAd[i][j] + " ");
+            }
+            System.out.println(" ");
+        }
+    }
+    
+    public void crearVertices() {
+        for (int i = 0; i < this.oPeliculas.length; i++) {
+            nuevoVertice(this.oPeliculas[i]);
+        }
+    }
+    
+    public void crearArcos() {
+        Vertice[] verticesTemp = this.verts;
+        String[] actorTemp1;
+        for (int i = 0; i < this.verts.length; i++) {
+            for (int j = 0; j < verticesTemp.length; j++) {
+                if (this.verts[i] != null && verticesTemp[j] != null && !this.verts[i].getNombreVertice().equals(verticesTemp[j].getNombreVertice())) {
+                    actorTemp1 = this.verts[i].getNombreVertice().split(",");
+                    for (int k = 0; k < actorTemp1.length; k++) {
+                        if (verticesTemp[j].getNombreVertice().contains(actorTemp1[k])) {
+                            nuevoArco(this.verts[i].getNombreVertice(), verticesTemp[j].getNombreVertice(), this.verts[i].getPelicula());
+                            System.out.println("hay un arco entre " + this.verts[i].getNombreVertice() + " y " + verticesTemp[j].getNombreVertice());
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -101,13 +124,22 @@ public class GrafoMatriz {
         return -1;
     }
 
-    public void nuevoVertice(String nom) {
-        boolean esta = numVertice(nom) >= 0;
-        if (!esta) {
-            Vertice v = new Vertice(nom);
+    public void nuevoVertice(Pelicula pelicula) {
+        ListaSimple actores = pelicula.getLsActores();
+        String temp = "";
+        NodoSimple pAux = actores.getpFirst();
+        while (pAux != null) {
+            temp += pAux.getsData() + ",";
+            pAux = pAux.getpNext();
+        }
+        temp = temp.replaceFirst(".$","");
+        //mochar coma
+        System.out.println(temp);
+        //boolean esta = numVertice(nom) >= 0;
+            Vertice v = new Vertice(temp);
+            v.setPelicula(pelicula.getSIdPelicula());
             v.asigVert(this.numVerts);
             this.verts[this.numVerts++] = v;
-        }
     }
 
     //busca el vértice en el array. Devuelve -1 si no lo encuentra:
@@ -124,15 +156,12 @@ public class GrafoMatriz {
         return (i < this.numVerts) ? i : -1;
     }
 
-    public void nuevoArco(String a, String b) throws Exception {
+    public void nuevoArco(String a, String b, String pelicula) {
         int va,
          vb;
         va  = numVertice(a);
         vb = numVertice(b);
-        if (va  < 0 || vb < 0) {
-            throw new Exception("Vértice no existe");
-        }
-        this.matAd[va][vb] = 1;
+        this.matAd[va][vb] = Integer.parseInt(pelicula);
     }
 
     //Determina si dos vertices forman un arco

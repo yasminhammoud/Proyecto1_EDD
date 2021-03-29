@@ -17,10 +17,7 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author fidel
- */
+// *********** EQUIPO *********** FIDEL BARREAT - ALEJANDRO GUZMAN - YASMIN HAMMOUD
 public class Main extends javax.swing.JFrame {
 
     GrafoMatriz grafo = new GrafoMatriz();

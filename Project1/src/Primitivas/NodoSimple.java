@@ -1,5 +1,6 @@
 package Primitivas;
 
+// *********** EQUIPO *********** FIDEL BARREAT - ALEJANDRO GUZMAN - YASMIN HAMMOUD
 public class NodoSimple {
 
     private NodoSimple pNext;

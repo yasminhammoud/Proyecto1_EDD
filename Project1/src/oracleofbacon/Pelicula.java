@@ -7,10 +7,8 @@ package oracleofbacon;
 
 import Primitivas.ListaSimple;
 
-/**
- *
- * @author fidel
- */
+
+// *********** EQUIPO *********** FIDEL BARREAT - ALEJANDRO GUZMAN - YASMIN HAMMOUD
 public class Pelicula {
 
     private String sIdPelicula;
@@ -26,15 +24,15 @@ public class Pelicula {
     }
 
     public String[] getCast() {
-        String actoresArray[] = new String[this.lsActores.getiSize()];
+        String actoresArray[] = new String[this.getLsActores().getiSize()];
 
-        for (int i = 0; i < this.lsActores.getiSize(); i++) actoresArray[i] = this.lsActores.leer(i);
+        for (int i = 0; i < this.getLsActores().getiSize(); i++) actoresArray[i] = this.getLsActores().leer(i);
         
         return actoresArray;
     }
 
     public void agregarActor(String IdActor) {
-        lsActores.annadirAlFinal(IdActor);
+        getLsActores().annadirAlFinal(IdActor);
     }
 
     public String getSIdPelicula() {
@@ -46,8 +44,23 @@ public class Pelicula {
     }
 
     public boolean partOfMovie(String actorID) {
-        return lsActores.contiene(actorID);
+        return getLsActores().contiene(actorID);
 
     }
+    
+    /**
+     * @return the lsActores
+     */
+    public ListaSimple getLsActores() {
+        return lsActores;
+    }
+
+    /**
+     * @param lsActores the lsActores to set
+     */
+    public void setLsActores(ListaSimple lsActores) {
+        this.lsActores = lsActores;
+    }
+
 
 }
